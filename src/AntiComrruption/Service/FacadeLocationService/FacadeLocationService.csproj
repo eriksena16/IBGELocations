@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Facade\Contract\FacadeLocationContract\FacadeLocationContract.csproj" />
-    <ProjectReference Include="..\..\..\IBGE\Model\IBGEModel\IBGEModel.csproj" />
     <ProjectReference Include="..\..\..\Location\Model\LocationModel\LocationModel.csproj" />
   </ItemGroup>
 

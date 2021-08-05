@@ -1,5 +1,5 @@
 ﻿using IBGE.Model.IBGEModel;
-using LocationService;
+using LocationContract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +12,9 @@ namespace LocationWebApi.Controller
     [Route("api/[controller]/[action]")]
     public class CityController : ControllerBase
     {
-        private readonly LocationCityService _locationCityService;
+        private readonly ILocationCityService _locationCityService;
 
-        public CityController(LocationCityService locationCityService)
+        public CityController(ILocationCityService locationCityService)
         {
             
             _locationCityService = locationCityService;

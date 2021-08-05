@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace IBGE.Model.IBGEModel
+﻿namespace IBGE.Model.IBGEModel
 {
     public class City
     {

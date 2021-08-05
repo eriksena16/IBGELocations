@@ -17,7 +17,7 @@ namespace FacadeLocationService
 
         public CityLocationService(IHttpClientFactory httpClientFactory, IOptionsMonitor<IbgeLocationOptions> ibgeLocationOptions)
         {
-             _httpClientFactory = httpClientFactory;
+            _httpClientFactory = httpClientFactory;
             _ibgeLocationOptions = ibgeLocationOptions.CurrentValue;
         }
 
@@ -42,7 +42,7 @@ namespace FacadeLocationService
                 cityDTO.NomeEstado = city.microrregiao.mesorregiao.UF.nome;
                 cityDTOs.Add(cityDTO);
             }
-            return await Task.FromResult(new List<CityDTO>());
+            return await Task.FromResult(cityDTOs);
         }
     }
 }
