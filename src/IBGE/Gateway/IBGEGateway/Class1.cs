@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBGEService
+namespace IBGEGateway
 {
     public class Class1
     {

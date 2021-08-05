@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IBGE\Model\IBGEModel\IBGEModel.csproj" />
+    <ProjectReference Include="..\Location\Locator\LocationLocator\LocationLocator.csproj" />
+    <ProjectReference Include="..\Location\Service\LocationService\LocationService.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Facade\Contract\FacadeLocationContract\FacadeLocationContract.csproj" />
+    <ProjectReference Include="..\..\Contract\LocationContract\LocationContract.csproj" />
+  </ItemGroup>
+
+</Project>

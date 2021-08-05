@@ -1,4 +1,5 @@
 using IBGE.Model.IBGEModel;
+using LocationLocator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,13 +18,13 @@ namespace IBGELocations2
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -32,7 +33,10 @@ namespace IBGELocations2
                 //options.BaseAddress = new Uri(Configuration.GetSection("IbgeLocationOptions:BaseAddress").Value);
             });
 
+            services.Configure<IbgeLocationOptions>(Configuration.GetSection(nameof(IbgeLocationOptions)));
+
             services.AddControllers();
+            services.ConfigureLocationService();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LocationWebApi", Version = "v1" });
@@ -45,9 +49,10 @@ namespace IBGELocations2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LocationWebApi v1"));
+                
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LocationWebApi v1"));
 
             app.UseHttpsRedirection();
 

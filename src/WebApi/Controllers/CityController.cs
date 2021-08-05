@@ -1,13 +1,9 @@
 ﻿using IBGE.Model.IBGEModel;
+using LocationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace LocationWebApi.Controller
@@ -16,13 +12,12 @@ namespace LocationWebApi.Controller
     [Route("api/[controller]/[action]")]
     public class CityController : ControllerBase
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IbgeLocationOptions _ibgeLocationOptions;
+        private readonly LocationCityService _locationCityService;
 
-        public CityController(IHttpClientFactory httpClientFactory, IOptionsMonitor<IbgeLocationOptions> ibgeLocationOptions)
+        public CityController(LocationCityService locationCityService)
         {
-           this._httpClientFactory = httpClientFactory;
-            _ibgeLocationOptions = ibgeLocationOptions.CurrentValue;
+            
+            _locationCityService = locationCityService;
         }
 
         [HttpGet]
@@ -34,14 +29,9 @@ namespace LocationWebApi.Controller
             if (ufCode is null)
                 return BadRequest(ufCode);
 
-            string requestUri = string.Format(_ibgeLocationOptions.RequestUriCity, ufCode);
-            HttpClient httpClient = _httpClientFactory.CreateClient(IbgeLocationOptions.Instance);
-            httpClient.BaseAddress = new Uri(_ibgeLocationOptions.BaseAddress);
-            HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(requestUri);
-            string jsonContent = await httpResponseMessage.Content.ReadAsStringAsync();
-            List<City> cities = JsonConvert.DeserializeObject<List<City>>(jsonContent);
+            var result = await _locationCityService.Get(ufCode);
 
-            return Ok(cities);
+            return Ok(result);
         }
 
     }
