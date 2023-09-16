@@ -7,6 +7,6 @@ namespace FacadeLocationContract
 {
     public interface ICityLocationFacade
     {
-        Task<List<CityDTO>> Get(int? ufCode);
+        Task<List<CityDTO>> Get(string uf);
     }
 }

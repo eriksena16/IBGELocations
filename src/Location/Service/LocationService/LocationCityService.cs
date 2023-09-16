@@ -15,9 +15,9 @@ namespace LocationService
             _cityLocationFacade = cityLocationFacade;
         }
 
-        public async Task<List<CityDTO>> Get(int? ufCode)
+        public async Task<List<CityDTO>> Get(string uf)
         {
-            return await _cityLocationFacade.Get(ufCode);
+            return await _cityLocationFacade.Get(uf);
         }
     }
 }

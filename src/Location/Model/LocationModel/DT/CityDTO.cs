@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LocationModel.DT
+﻿namespace LocationModel.DT
 {
     public class CityDTO
     {

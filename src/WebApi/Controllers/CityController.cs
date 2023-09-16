@@ -1,9 +1,11 @@
 ﻿using IBGE.Model.IBGEModel;
 using LocationContract;
+using LocationModel.DT;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LocationWebApi.Controller
@@ -16,7 +18,7 @@ namespace LocationWebApi.Controller
 
         public CityController(ILocationCityService locationCityService)
         {
-            
+
             _locationCityService = locationCityService;
         }
 
@@ -24,12 +26,13 @@ namespace LocationWebApi.Controller
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<City>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
-        public async Task<ActionResult> GetCity(int? ufCode)
+        [ProducesResponseType(typeof(List<CityDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult> GetCity(string uf)
         {
-            if (ufCode is null)
-                return BadRequest(ufCode);
+            if (string.IsNullOrEmpty(uf))
+                return BadRequest(uf);
 
-            var result = await _locationCityService.Get(ufCode);
+            var result = await _locationCityService.Get(uf);
 
             return Ok(result);
         }
